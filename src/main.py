@@ -47,10 +47,12 @@ class DBTBlueGreen(Core):
             self._thread_count = int(os.environ.get('DBT_THREAD_COUNT', '6'))
             self._stomp_on_green_timeout = int(os.environ.get('STOMP_ON_GREEN_TIMEOUT', 10))
 
-        launch_root = Utilities.get_path_to_launch_root()[1:].split('/')[:-2]
-        dbt_root = launch_root + ['transform']
-        self._dbt_root = '/' + '/'.join(dbt_root)
-        self.logger.info(f'Running DBT in {dbt_root}')
+            launch_root = Utilities.get_path_to_launch_root()[1:].split('/')[:-2]
+            dbt_root = launch_root + ['transform']
+            self._dbt_root = '/' + '/'.join(dbt_root)
+            self.logger.info(f'Running DBT in {dbt_root}')
+        else:
+            self._dbt_root = './'
 
     def main(self,
              snapshot_select: str,
